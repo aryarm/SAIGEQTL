@@ -14,6 +14,7 @@ source:
   patches:
     - patches/0001-use-shared-libs-in-makevars.patch
     - patches/0002-suggest-fastSave-in-description.patch
+    - patches/0003-revert-pixi-shebangs.patch
 
 build:
   number: 0
@@ -105,3 +106,6 @@ about:
 extra:
   recipe-maintainers:
     - weizhouUMICH
+  additional-platforms:
+    - linux-aarch64
+    - osx-arm64
