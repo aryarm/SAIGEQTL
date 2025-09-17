@@ -95,12 +95,12 @@ test:
     - createSparseGRM.R --help
 
 about:
-  home: https://github.com/{{ username }}/qtl
+  home: https://github.com/{{ username }}/SAIGEQTL
   license: GPL-3.0-only
   license_family: GPL3
   license_file: LICENSE
   summary: SAIGE-QTL is an R package developed for scalable and accurate expression quantitative trait locus (QTL) mapping for single-cell studies
-  dev_url: https://github.com/{{ username }}/qtl
+  dev_url: https://github.com/{{ username }}/SAIGEQTL
   doc_url: https://weizhou0.github.io/SAIGE-QTL-doc
 
 extra:
