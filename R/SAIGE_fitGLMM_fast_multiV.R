@@ -123,7 +123,7 @@ fitNULLGLMM_multiV <- function(plinkFile = "",
                                isExportResiduals = FALSE,
                                varRatioBatchSize = 10,
                                solverMethod = "auto") {
-      start_0 <- proc.time()
+  start_0 <- proc.time()
   ## set up output files
   modelOut <- paste0(outputPrefix, ".rda")
 
@@ -1121,7 +1121,9 @@ print(start_7 - start_0)
 
     tau <- rep(0, k)
     fixtau <- rep(0, k)
-    # tauInit = tau
+    if (length(tauInit) < k) {
+      tauInit <- c(tauInit, rep(0, k - length(tauInit)))
+    }
 
     set_isSparseGRM(useSparseGRMtoFitNULL)
     set_useGRMtoFitNULL(useGRMtoFitNULL)
@@ -1465,7 +1467,9 @@ print(start_7 - start_0)
       subSampleInGeno_unique <- subSampleInGeno[!duplicated(subSampleInGeno)]
 
       # setgeno(bedFile, bimFile, famFile, subSampleInGeno, indicatorGenoSamplesWithPheno, memoryChunk, isDiagofKinSetAsOne)
-      setgeno(bedFile, bimFile, famFile, subSampleInGeno_unique, indicatorGenoSamplesWithPheno, memoryChunk, isDiagofKinSetAsOne)
+      if(!useGRMtoFitNULL | useSparseGRMtoFitNULL){
+        setgeno(bedFile, bimFile, famFile, subSampleInGeno_unique, indicatorGenoSamplesWithPheno, memoryChunk, isDiagofKinSetAsOne)
+      }
     }
   } else {
     cat("Skip fitting the NULL GLMM\n")
@@ -2203,6 +2207,7 @@ glmmkin.ai_PCG_Rcpp_multiV <- function(bedFile, bimFile, famFile, Xorig, isCovar
   if (is.null(subPheno$IndexGeno)) {
     subSampleInGeno <- subPheno$IndexPheno
   }
+  subSampleInGeno <- subSampleInGeno[!duplicated(subSampleInGeno)]
   if (verbose) {
     print("Start reading genotype plink file here")
   }

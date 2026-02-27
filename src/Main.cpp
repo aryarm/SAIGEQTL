@@ -9,6 +9,7 @@
 #include <cstdio>         // std::remove
 #include <fstream>
 #include <string.h>
+#include <algorithm>
 // Currently, omp does not work well, will check it later
 // error: SET_VECTOR_ELT() can only be applied to a 'list', not a 'character'
 // remove all Rcpp::List to check if it works
@@ -4892,10 +4893,19 @@ int nrun, int maxiterPCG, float tolPCG, float tol, float traceCVcutoff, bool LOC
         arma::fvec Dtau(AI1.n_cols);
         //score1.print("score");
         try{
-                Dtau = arma::solve(AI1, score1, arma::solve_opts::allow_ugly);
+                arma::vec Dtau_d = arma::solve(
+                        arma::conv_to<arma::mat>::from(AI1),
+                        arma::conv_to<arma::vec>::from(score1),
+                        arma::solve_opts::allow_ugly
+                );
+                Dtau = arma::conv_to<arma::fvec>::from(Dtau_d);
         }
         catch(std::runtime_error){
                 std::cout << "arma::solve(AI, score): AI seems singular, using less variant components matrix is suggested." << std::endl;
+                Dtau.zeros();
+        }
+        if(!Dtau.is_finite()){
+                std::cout << "arma::solve(AI, score): non-finite update detected. Setting Dtau to zero." << std::endl;
                 Dtau.zeros();
         }
         //std::cout << "check 3" << std::endl;
@@ -4913,7 +4923,6 @@ int nrun, int maxiterPCG, float tolPCG, float tol, float traceCVcutoff, bool LOC
         // fill dtau using dtau_pre, padding 0
         int i2 = 0;
         for(int i=0; i<k1; i++){
-                std::cout << "i " << i << std::endl;
                 if(fixtauVec(i)==0){ // not fixed
                         Dtau_k1(i) = Dtau(i2);
                         i2++;
@@ -4935,6 +4944,17 @@ int nrun, int maxiterPCG, float tolPCG, float tol, float traceCVcutoff, bool LOC
                         tauVec = tau0 + step*Dtau_k1;
                         tauVec.elem( arma::find(tauVec < tol && tau0 < tol) ).zeros();
                 } // end while
+                // For the common two-component model with fixed residual variance (tau[0]=1),
+                // keep random-effect variance inside the same admissible range used in Step 1 checks.
+                if(tauVec.n_elem == 2 && fixtauVec.n_elem == 2 && fixtauVec(0) == 1 && fixtauVec(1) == 0){
+                        const float tau_lower = 1e-6f;
+                        const float tau_upper = 1.0f - 1e-6f;
+                        while((tauVec(1) <= tau_lower || tauVec(1) >= tau_upper) && step > 1e-8f){
+                                step = step * 0.5f;
+                                tauVec = tau0 + step * Dtau_k1;
+                        }
+                        tauVec(1) = std::min(std::max(tauVec(1), tau_lower), tau_upper);
+                }
                 tauVec.elem( arma::find(tauVec < tol) ).zeros();
         }else{
                 fixrhoidx0 = updatefixrhoidx0(tau0, tol);
