@@ -45,7 +45,6 @@ requirements:
     - r-ellipsis
     - r-matrix
     - r-optparse
-    - r-qlcmatrix
     - r-rcpp >=1.0.7
     - r-rcpparmadillo >=0.10.7.5
     - r-rcppeigen
@@ -55,9 +54,6 @@ requirements:
     - r-rversions
     - r-r.utils
     - r-rsqlite
-    - r-spatest ==3.1.2
-    - r-skat
-    - r-metaskat
     - r-vctrs
     - r-furrr
     - r-rcppnumerical
