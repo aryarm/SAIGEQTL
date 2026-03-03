@@ -45,8 +45,8 @@ jobs:
         id: get-version
         run: |
           desc <- read.dcf("DESCRIPTION")
-          echo "version=${desc[,'Version']}" >> $GITHUB_OUTPUT
-          echo "name=${desc[,'Package']}" >> $GITHUB_OUTPUT
+          cat("version=", desc[,'Version'], "\n", file=Sys.getenv("GITHUB_OUTPUT"), append=TRUE)
+          cat("name=", desc[,'Package'], "\n", file=Sys.getenv("GITHUB_OUTPUT"), append=TRUE)
         shell: Rscript {0}
         
       - name: Build source package
