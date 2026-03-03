@@ -92,7 +92,6 @@ test:
     - step2_tests_qtl.R --help
     - step3_gene_pvalue_qtl.R --help
     - makeGroupFile.R --help
-    - createSparseGRM.R --help
 
 about:
   home: https://github.com/{{ username }}/SAIGEQTL
