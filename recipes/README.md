@@ -30,7 +30,7 @@ For example, you can refer to [this tutorial](https://bioconda.github.io/tutoria
 You can refer to [this blog](https://www.anaconda.com/blog/patching-source-code-to-conda-build-recipes) for help creating and maintaining patch files.
 ChatGPT can also be very helpful if you share the error message from the logs and the changes you've made to your `DESCRIPTION` file, and ask it how to update the recipe files.
 
-Typically, maintenance of a bioconda recipe would also include updates to the metadata of the bioconda package at the top of the [meta.yaml](r-saigeqtl/meta.yaml) file (such as the latest version number, commit, and SHA256). However, the [bioconda.yaml GitHub action workflow](../.github/workflows/bioconda.yaml) GitHub action should handle this automatically.
+Typically, maintenance of a bioconda recipe would also include updates to the metadata of the bioconda package at the top of the [meta.yaml](r-saigeqtl/meta.yaml) file (such as the latest version number, commit, and SHA256). However, the [bioconda.yaml GitHub action workflow](../.github/workflows/bioconda.yaml) should handle this automatically.
 
 If you are a user of SAIGEQTL and you'd like to contribute to this recipe, please fork this repository and create a pull request. You can [enable GitHub actions on your fork](https://github.com/orgs/community/discussions/176785#discussioncomment-14667305) to test out your changes. The most common maintenance task is #2 (updating the patch files).
 
