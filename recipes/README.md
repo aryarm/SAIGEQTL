@@ -1,5 +1,5 @@
 ## usage
-This conda recipe compiles and installs the `r-saigeqtl` conda package. It is designed to be run by the [bioconda.yml GitHub action workflow](../.github/workflows/bioconda.yml).
+This conda recipe compiles and installs the `r-saigeqtl` conda package. It is designed to be run by the [bioconda.yaml GitHub action workflow](../.github/workflows/bioconda.yaml).
 
 The workflow will generate conda packages for any commit to main or a PR that targets main. You can download and test any of the packages:
 1. First, navigate to the Actions tab and click on the most recent successful execution:
@@ -27,10 +27,10 @@ Occasional maintenance of the bioconda recipe must be performed. This may includ
 
 You can search online for help with any of these.
 For example, you can refer to [this tutorial](https://bioconda.github.io/tutorials/2024-debugging-bioinformatic-software-to-bioconda.html) for debugging broken recipes on the Bioconda website.
-You can refer to this blog for help creating and maintaining patch files: https://www.anaconda.com/blog/patching-source-code-to-conda-build-recipes
+You can refer to [this blog](https://www.anaconda.com/blog/patching-source-code-to-conda-build-recipes) for help creating and maintaining patch files.
 ChatGPT can also be very helpful if you share the error message from the logs and the changes you've made to your `DESCRIPTION` file, and ask it how to update the recipe files.
 
-Typically, maintenance of a bioconda recipe would also include updates to the metadata of the bioconda package at the top of the [meta.yaml](r-saigeqtl/meta.yaml) file (such as the latest version number, commit, and SHA256). However, the [bioconda.yml GitHub action workflow](../.github/workflows/bioconda.yml) GitHub action should handle this automatically.
+Typically, maintenance of a bioconda recipe would also include updates to the metadata of the bioconda package at the top of the [meta.yaml](r-saigeqtl/meta.yaml) file (such as the latest version number, commit, and SHA256). However, the [bioconda.yaml GitHub action workflow](../.github/workflows/bioconda.yaml) GitHub action should handle this automatically.
 
 If you are a user of SAIGEQTL and you'd like to contribute to this recipe, please fork this repository and create a pull request. You can [enable GitHub actions on your fork](https://github.com/orgs/community/discussions/176785#discussioncomment-14667305) to test out your changes. The most common maintenance task is #2 (updating the patch files).
 
@@ -39,7 +39,7 @@ Once SAIGEQTL is ready, this recipe should be [copied over to the Bioconda repos
 
 When copying the recipe, you should make sure to manually update the metadata at the top of the file.
 
-All Bioconda packages are automatically converted into Docker images and published to the [Biocontainers Registry](https://biocontainers-edu.readthedocs.io/en/latest/conda_integration.html#defining-a-conda-package), so users would be able to use the Dockerfiles in that repository at that point.
+All Bioconda packages are automatically converted into Docker images and published to the [Biocontainers Registry](https://biocontainers-edu.readthedocs.io/en/latest/conda_integration.html#defining-a-conda-package), so users would be able to use the Docker images in that repository at that point.
 
 ## one caveat
 All dependencies of a conda package must also be published to conda. The `fastSave` package is the only dependency that isn't already published to conda, so this recipe doesn't install `fastSave`, unfortunately. In the future, someone could create a recipe for `fastSave` and publish it to conda, as well.
