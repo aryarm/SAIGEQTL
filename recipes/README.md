@@ -4,7 +4,7 @@ This conda recipe compiles and installs the `r-saigeqtl` conda package. It is de
 The workflow will generate conda packages for any commit to main or a PR that targets main. You can download and test any of the packages:
 1. First, navigate to the Actions tab and click on the most recent successful execution:
     https://github.com/weizhou0/SAIGEQTL/actions/workflows/bioconda.yaml?query=branch%3Amain+is%3Asuccess
-2. Now scroll down to the section titled "Artifacts" and download the zip archive file that is most appropriate for your platform. At the moment, the recipe supports the following.
+2. Now scroll down to the section titled "Artifacts" and download the `.conda` archive file that is most appropriate for your platform. At the moment, the recipe supports the following.
     - Linux (x86) aka _Ubuntu_
     - Linux (aarch64) aka _Ubuntu ARM_
     - macOS 15 (x86)
@@ -12,9 +12,7 @@ The workflow will generate conda packages for any commit to main or a PR that ta
     <img width="200" alt="Artifacts" src="https://github.com/user-attachments/assets/a2c46c35-08ff-46b0-bb88-c70d376833f7" />
 3. To install the package, run the following via the command-line
     ```bash
-    unzip -d r-saigeqtl r-saigeqtl-*.zip # unzip the artifact from GitHub
-    conda install -c conda-forge -c bioconda -c "file://$PWD/r-saigeqtl" r-saigeqtl
-    rm -r r-saigeqtl # delete the artifact, which is no longer needed
+    conda install -c conda-forge -c bioconda r-saigeqtl-*.conda
     ```
 4. Done! Now, you can run `step1_fitNULLGLMM_qtl.R --help`, for example.
 
@@ -36,7 +34,7 @@ If you are a user of SAIGEQTL and you'd like to contribute to this recipe, pleas
 
 ## publishing this recipe on Bioconda
 Once SAIGEQTL is ready, this recipe should be [copied over to the Bioconda repository](https://bioconda.github.io/contributor/index.html) so that users can install it via a single command.
-```
+```bash
 conda install -c conda-forge -c bioconda r-saigeqtl
 ```
 If you are a user of SAIGEQTL, you can [click here](https://anaconda.org/search?q=saigeqtl) to check whether someone has uploaded the recipe yet.
