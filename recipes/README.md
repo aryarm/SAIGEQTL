@@ -35,11 +35,11 @@ Typically, maintenance of a bioconda recipe would also include updates to the me
 If you are a user of SAIGEQTL and you'd like to contribute to this recipe, please fork this repository and create a pull request. You can [enable GitHub actions on your fork](https://github.com/orgs/community/discussions/176785#discussioncomment-14667305) to test out your changes. The most common maintenance task is #2 (updating the patch files).
 
 ## publishing this recipe on Bioconda
-Once SAIGEQTL is ready, this recipe should be [copied over to the Bioconda repository](https://bioconda.github.io/contributor/index.html) so that users can install it by simply running one command.
+Once SAIGEQTL is ready, this recipe should be [copied over to the Bioconda repository](https://bioconda.github.io/contributor/index.html) so that users can install it via a single command.
 ```
 conda install -c conda-forge -c bioconda r-saigeqtl
 ```
-If you are a user of SAIGEQTL, you can [click here](https://anaconda.org/search?q=saigeqtl) to check whether this has happened yet.
+If you are a user of SAIGEQTL, you can [click here](https://anaconda.org/search?q=saigeqtl) to check whether someone has uploaded the recipe yet.
 
 When copying the recipe, you should make sure to manually update the metadata at the top of the file.
 
