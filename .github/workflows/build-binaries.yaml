@@ -36,8 +36,13 @@ jobs:
           sudo apt-get install -y libopenblas-dev liblapack-dev libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
 
       - name: Install c dependencies
+        id: c-deps
         run: |
           ./install_scripts/install_dependencies.sh
+          # allow thirdParty/cget in source package (CI only)
+          if grep -qx 'thirdParty/cget' .Rbuildignore; then
+            sed -i.bak '/^thirdParty\/cget$/d' .Rbuildignore
+          fi
 
       - name: Install R dependencies
         run: |

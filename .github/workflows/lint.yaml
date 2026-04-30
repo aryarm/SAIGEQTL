@@ -44,17 +44,6 @@ jobs:
           fi
           source $PROFILE_DIR
 
-      - name: Install c dependencies
-        id: c-deps
-        run: |
-          ./install_scripts/install_dependencies.sh
-          # allow thirdParty/cget in source package (CI only)
-          if grep -qx 'thirdParty/cget' .Rbuildignore; then
-            sed -i.bak '/^thirdParty\/cget$/d' .Rbuildignore
-          fi
-          cat .Rbuildignore
-          test -f thirdParty/cget/include/savvy/reader.hpp
-
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::lintr, any::styler, any::roxygen2, local::.
