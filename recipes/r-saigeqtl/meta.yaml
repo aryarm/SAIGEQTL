@@ -14,7 +14,6 @@ source:
   patches:
     - patches/0001-use-shared-libs-in-makevars.patch
     - patches/0002-revert-pixi-shebangs.patch
-    - patches/0003-link-import-DESCRIPTION.patch
 
 build:
   number: 0
