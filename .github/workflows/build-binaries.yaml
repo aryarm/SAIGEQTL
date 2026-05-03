@@ -29,6 +29,9 @@ jobs:
         with:
           r-version: '4.3.0'
           use-public-rspm: true
+
+      - name: Setup Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
           
       - name: Install system dependencies
         run: |
@@ -188,7 +191,7 @@ jobs:
         
       - name: Build binary package
         run: |
-          binary_path <- pkgbuild::build(binary = TRUE, dest_path = ".", args = c("--no-build-vignettes"))
+          binary_path <- pkgbuild::build(binary = TRUE, dest_path = ".")
           cat("Binary package:", binary_path, "\n")
           
           # Rename with platform info for clarity
