@@ -188,7 +188,7 @@ jobs:
         
       - name: Build binary package
         run: |
-          binary_path <- pkgbuild::build(binary = TRUE, dest_path = ".")
+          binary_path <- pkgbuild::build(binary = TRUE, dest_path = ".", args = c("--no-build-vignettes"))
           cat("Binary package:", binary_path, "\n")
           
           # Rename with platform info for clarity
